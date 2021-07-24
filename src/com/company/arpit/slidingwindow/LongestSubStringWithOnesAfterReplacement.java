@@ -22,6 +22,9 @@ public class LongestSubStringWithOnesAfterReplacement {
 
         int length = getMaximumSubArrayWithAllOnesAfterKZeroReplacement(arr, k);
         System.out.println(length);
+
+        int length1 = findLength(arr, k);
+        System.out.println(length1);
         /*
         * Input: Array=[0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1], k=3
            Output: 9
@@ -31,10 +34,37 @@ public class LongestSubStringWithOnesAfterReplacement {
         int[] arr1 = {0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1};
         int k1 = 3;
 
-        int length1 = getMaximumSubArrayWithAllOnesAfterKZeroReplacement(arr1, k1);
-        System.out.println(length1);
+        int length2 = getMaximumSubArrayWithAllOnesAfterKZeroReplacement(arr1, k1);
+        System.out.println(length2);
+
+        int length3 = findLength(arr, k);
+        System.out.println(length3);
 
 
+    }
+
+    public static int findLength(int[] arr, int k) {
+
+
+        Map<Integer,Integer> map=new HashMap<>();
+        int start=0;
+        int maxLength=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+
+            while(map.get(0)>k)
+            {
+                map.put(arr[start],map.get(arr[start])-1);
+                start++;
+
+            }
+            maxLength=Math.max(maxLength,i-start+1);
+
+
+        }
+        return maxLength;
     }
 
     private static int getMaximumSubArrayWithAllOnesAfterKZeroReplacement(int[] arr, int k) {
