@@ -1,15 +1,13 @@
 package graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
     Map<Integer, List<Integer>> parentChild;
     int vertex;
     int[][] edges;
 
+    //AdjacentList
     public Graph(int vertex) {
         this.vertex = vertex;
         parentChild = new HashMap<>();
@@ -17,6 +15,7 @@ public class Graph {
             parentChild.put(i, new ArrayList<>());
     }
 
+    //AdjacentMatrix
     public Graph(int vertex, int[][] input) {
         this.vertex = vertex;
         edges = new int[vertex][vertex];
@@ -72,6 +71,52 @@ public class Graph {
         for (Map.Entry<Integer, List<Integer>> entrySet : edges.entrySet()) {
             System.out.println("Parent: " + entrySet.getKey() + " Childs: " + entrySet.getValue());
         }
+
+    }
+
+    public static void bfs(Graph g, int startVertex, int destination) {
+        boolean[] visited = new boolean[g.getVertex()];
+        int[] parent = new int[g.getVertex()];
+        int[] distance = new int[g.getVertex()];
+
+        Queue<Integer> q = new LinkedList<>();
+        q.add(startVertex);
+        visited[startVertex] = true;
+        parent[startVertex] = startVertex;
+        distance[startVertex] = 0;
+
+        while (!q.isEmpty()) {
+            int vertex = q.poll();
+            System.out.print(vertex + "-->");
+            List<Integer> childs = g.getParentChild().get(vertex);
+
+            for (Integer node : childs) {
+
+                if (!visited[node]) {
+                    q.add(node);
+                    visited[node] = true;
+                    parent[node] = vertex;
+                    distance[node] = distance[vertex] + 1;
+                }
+
+
+            }
+
+
+        }
+
+        for (int i = 0; i < distance.length; i++) {
+            System.out.println("Min Distance from Source Node " + startVertex + " to vertex " + i + "= " + distance[i]);
+        }
+       System.out.println("Path from Source "+ startVertex+" to destination "+destination);
+        int temp = destination;
+        while (temp != startVertex) {
+            System.out.print(temp + "-->");
+            temp = parent[temp];
+
+        }
+        System.out.print(startVertex);
+
 
     }
 
