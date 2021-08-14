@@ -13,10 +13,11 @@ public class Test {
         g.addEdges(5,6);
         //Graph.printAdjacentList(g);
 
-        Graph.bfs(g,1,6);
+      //  Graph.bfs(g,1,6);
        // int[][] edges={{0,1},{0,2},{0,3},{0,4},{0,5}};
        // Graph g1=new Graph(6);
        // Graph.printAdjacentMatrix(g1);
+        Graph.dfs(g,1);
 
 
 

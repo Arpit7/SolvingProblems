@@ -98,11 +98,7 @@ public class Graph {
                     parent[node] = vertex;
                     distance[node] = distance[vertex] + 1;
                 }
-
-
             }
-
-
         }
 
         for (int i = 0; i < distance.length; i++) {
@@ -117,6 +113,23 @@ public class Graph {
         }
         System.out.print(startVertex);
 
+
+    }
+
+    public static void dfs(Graph g,int startvertex)
+    {
+        boolean[] visited=new boolean[g.getVertex()];
+        dfsHelper(g,startvertex,visited);
+    }
+
+    private static void dfsHelper(Graph g, int startvertex,boolean[] visited) {
+        visited[startvertex]=true;
+        System.out.print(startvertex +"-->");
+        for(Integer node:g.getParentChild().get(startvertex))
+        {
+            if(!visited[node])
+                dfsHelper(g,node,visited);
+        }
 
     }
 
