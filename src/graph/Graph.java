@@ -61,8 +61,10 @@ public class Graph {
 
 
 
-    public void addEdges(int source, int destination) {
+    public void addEdges(int source, int destination,boolean undirected) {
         parentChild.get(source).add(destination);
+        if(undirected)
+            parentChild.get(destination).add(source);
     }
 
     public static void printAdjacentList(Graph g) {
